@@ -1,0 +1,176 @@
+{% extends 'layout.html' %}
+{% from "_formhelpers.html" import render_field, render_tell_field %}
+{% set active_page = "ferdi-emanetler" %}
+{% from 'bootstrap/form.html' import render_form %}
+{% block content %}
+<section class="full full_h" style="background-image: linear-gradient(275deg, #6ebb20, #129450)">
+    <div class="container">
+        <div class="row d-flex justify-content-between full_h align-items-center">
+            <div class="col-6 full_h d-flex align-items-center ms-5">
+                <div class="text-light fs-2 fw-semibold">Fərdi Əmanətlər</div>
+            </div>
+            <img class="col-md-6 head_image full_h me-5 d-sm-none d-md-block" src="../static/images/00034.jpg" alt="">
+        </div>
+    </div>
+</section>
+<div class="container-md container-lg mt-5">
+    <section class="mx-3">
+        {% for deposit in deposits %}
+        <div class="row mb-4">
+            <div class="col">
+                <div class="card bg-light border-0 p-4">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ deposit['image_url'] }}" class="img-fluid rounded"
+                                alt="Universal emanet" style="height: 200px;">
+                        </div>
+                        <div class="card-body col-md-4">
+                            <h5 class="card-title">{{ deposit['title'] }}</h5>
+                            <div class="d-flex">
+                                {% if deposit['term']|length == 0 %}
+                                <div class="mt-4"></div>
+                                {% else %}
+                                <div class="d-flex flex-column">
+                                    <p class="card-text me-5 text-secondary">Müddət:</p>
+                                    <p class="card-text fw-bolder fs-5">{{ deposit['term'] }} ayadək</p>
+                                </div>
+                                <div class="d-flex flex-column ms-4">
+                                    <p class="card-text text-secondary">Faiz dərəcəsi:</p>
+                                    <p class="card-text fw-bolder fs-5">{{ deposit['percent'] }} %-ədək</p>
+                                </div>
+                                {% endif %}
+                            </div>
+                            <hr>
+                            <a href="{{ deposit['details_btn'] }}"
+                                class="btn btn-light border border-1 rounded px-5 py-2 text-secondary emanet-btn-hover"><span
+                                    class="emanet-btn-hvr-text">Daha ətraflı</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </section>
+    <section class="row mx-3">
+            <div class="container my-5 p-5" style="background: #F9FAFB;">
+                <h3 class="pb-3 text-size-largest">Onlayn sifariş</h3>
+                <form action="" method="POST">
+                    {{ form.csrf_token }}
+                    <div class="row">
+                        {{ render_field(form.first_name, placeholder=form.first_name.label.text) }}
+                        {{ render_field(form.last_name, placeholder=form.last_name.label.text) }}
+                    </div>
+                    <div class="row">
+                        {{ render_field(form.deposit_type, placeholder=form.deposit_type.label.text) }}
+                        {{ render_tell_field(form.mobile_number, placeholder=form.mobile_number.label.text) }}
+                    </div>
+                    <hr style="opacity: 0.1;">
+                    <div class="row px-2">
+                        <div class="col-6">
+                        </div>
+                        <div class="col-md-6 col-sm-12">
+                            <button type="submit" class="border px-5 py-3 w-100 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded davamet-btn opacity-75">
+                                <div class="d-flex align-items-center ms-2">Davam et →</div>
+                        </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+    </section>
+    <section class="mx-3">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 bg-light mx-2">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner d-flex justify-content-bottom">
+                        <div class="carousel-item active">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">Rabita Mobile</h1>
+                                    <p class="fs-6 text-secondary mb-4">Rabita Mobila ilə banka getməyə ehtiyac
+                                        yoxdur, bankınız hər zaman yanınızdadır!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover  text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell1.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">Rabita Bot</h1>
+                                    <p class="fs-6 text-secondary mb-4">Azərbaycanın ilk maliyyə çat botu!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell2.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">İnternet bankçılıq</h1>
+                                    <p class="fs-6 text-secondary mb-4">Hesablarınızı idarə etmək rahatdır!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell3.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon d-none" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon d-none" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+{{ super() }}
+<script>
+    var wtf_phone_field = document.getElementById('phone');
+    wtf_phone_field.style.position = 'absolute';
+    wtf_phone_field.style.top = '-9999px';
+    wtf_phone_field.style.left = '-9999px';
+    wtf_phone_field.parentElement.insertAdjacentHTML('beforeend', '<div><input type="tel" id="_phone"></div>');
+    var fancy_phone_field = document.getElementById('_phone');
+    var fancy_phone_iti = window.intlTelInput(fancy_phone_field, {
+        separateDialCode: true,
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/16.0.4/js/utils.js",
+    });
+    fancy_phone_iti.setNumber(wtf_phone_field.value);
+    fancy_phone_field.addEventListener('blur', function() {
+        wtf_phone_field.value = fancy_phone_iti.getNumber();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <main> 
+        <div id="detailed-news-image" class="container-fluid d-flex align-items-center justify-content-around">
+                    <h3 class="text-white fs-1 w-50">Xəbərlər və elanlar</h3> 
+                   <a href="/" type="button" class="home-btn rounded-pill border border-light text-light">ƏSAS SƏHİFƏ</a>
+        </div>
+        <div class="container my-5">
+        {% set filter_buttons = [
+            ('/xeberler-ve-elanlar', 'xeberler-ve-elanlar', 'DAHA ÇOX'),
+            ('/bank', 'bank', 'BANK'),
+            ('/investisiya', 'investisiya', 'İNVESTİSİYA'),
+            ('/korporativ', 'korporativ', 'KORPORATİV')
+        ] -%}
+    
+        <div class="filter-btns d-flex w-50 my-5 justify-content-between">
+        {% for href, id, caption in filter_buttons %}       
+           <a type="button"  class="{%if request.path == href %} active {%endif%} btn filter-btn rounded-pill border" href="{{ href|e }}"> {{ caption|e}} </a>
+        {% endfor %}
+          </div>
+     
+        <hr>
+        <ul id="news-list">
+            {% for news in all_news %}
+             <li> 
+                <a class="" href="/{{news.id}}" title="{{news.title}}"> 
+                    <span class="news_tag">{{news.category_name}}</span> 
+                    <h4 class="news_title_class">{{news.title}}</h4> 
+                    <span class="news_date">{{news.date}}</span> 
+                </a> 
+            </li>
+            <hr>
+             {% else %}
+                    <h4 class="news_title_class text-center text-muted">Bu kateqoriya üzrə məlumat yoxdur.</h4>          
+            {% endfor %}
+         </ul>
+    </div>
+    </main>
+
+
+    {% endblock %}

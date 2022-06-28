@@ -1,0 +1,169 @@
+{% extends 'layout.html' %}
+{% set active_page = "kampaniyalar-1" %}
+{% block content %}
+
+
+<main>
+    <section class="full full_h" style="background-image: linear-gradient(275deg, #6ebb20, #129450)">
+        <div class="container-lg container-md">
+            <div class="row d-flex justify-content-between full_h-250 align-items-center">
+                <div class="col-6 full_h d-flex align-items-center ms-5">
+                    <div class="text-light fs-2 fw-semibold">Kampaniyalar</div>
+                </div>
+                <img class="col-6 d-sm-none d-lg-block d-md-none head_image full_h me-5"
+                    src="../static/images/speaker.jpg" alt="">
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-12 text-light fs-5 ms-5">Rabitəbank müştərilərini düşünərək, daim yenilik və
+                    kampaniyalarla onları sevindirir.</div>
+            </div>
+        </div>
+    </section>
+    <section class="container-lg container-md  my-5">
+        <div class="my-4 d-flex" >
+            <a class="text-decoration-none" href="/category/kampaniyalar-1">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'kampaniyalar-1' %} BTNactive {% endif %}  btn btn-light rounded-pill btn-sm buttonHover px-lg-3 py-2">BÜTÜN KAMPANİYALAR</button>
+            </a>
+            <a class="text-decoration-none" href="/category/kredit-2">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'kredit-2' %} BTNactive {% endif %} btn btn-light rounded-pill btn-sm ms-3 buttonHover px-3 py-2">KREDİT</button>
+            </a>
+            <a class="text-decoration-none" href="/category/emanetler-1">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'emanetler-1' %} BTNactive {% endif %} btn btn-light rounded-pill btn-sm ms-3 buttonHover px-3 py-2">ƏMANƏTLƏR</button>
+            </a>
+            <a class="text-decoration-none" href="/category/dasinmaz-emlak">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'dasinmaz-emlak' %} BTNactive {% endif %} btn btn-light rounded-pill btn-sm ms-3 buttonHover px-3 py-2">DAŞINMAZ ƏMLAK</button>
+            </a>
+            <a class="text-decoration-none" href="/category/biznesin-inkisafi">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'biznesin-inkisafi' %} BTNactive {% endif %} btn btn-light rounded-pill btn-sm ms-3 buttonHover px-3 py-2">BİZNESİN İNKİŞAFI</button>
+            </a>
+            <a class="text-decoration-none" href="/category/tikinti">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'tikinti' %} BTNactive {% endif %} btn btn-light rounded-pill btn-sm ms-3 buttonHover px-3 py-2">TİKİNTİ</button>
+            </a>
+            <a class="text-decoration-none" href="/category/neqliyyat-ve-avadanliq">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'neqliyyat-ve-avadanliq' %} BTNactive {% endif %} btn btn-light rounded-pill btn-sm ms-3 buttonHover px-3 py-2">NƏQLİYYAT VƏ
+                    AVADANLIQ</button>
+            </a>
+            <a class="text-decoration-none" href="/category/kart">
+                <button type="button" style="font-size: 10px;"
+                    class="{% if categoryName == 'kart' %} BTNactive {% endif %} btn btn-light rounded-pill btn-sm ms-3 buttonHover px-3 py-2">KART</button>
+            </a>
+        </div>
+    </section>
+    <section class="container mb-5">
+        <div class="row">
+            <div class="row">
+                {% if campaigns == [] %}
+                <div class="col-md-12 col-sm-12 d-flex justify-content-center opacity-25">
+                    <div class="col-6 d-flex justify-content-end pe-0 align-items-center"><i
+                            class="fa-solid fa-file-lines fa-xl"></i></div>
+                    <div class="col-6 col-sm-12 fs-4 ms-3">Bu kategoriya üzrə heç bir məlumat yoxdur.</div>
+                </div>
+                {% else %}
+                {% for campaign in campaigns %}
+                <div class="col-md-6 col-sm-12">
+                    <div class="card my-3 border-0 mycard" style="max-width: 540px; background: #F9FAFB;">
+                        <div class="row g-0">
+                            <div class="col-md-7 d-flex align-items-start pt-4 ps-4" style="height:220px;">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-4">Fərd</h5>
+                                    <p class="card-text">{{ campaign['title'] }}</p>
+                                    <div class="d-flex align-items-end" style="height: 100px;">
+                                        <a class="text-decoration-none" href="{{ campaign['details'] }}"><button
+                                                type="button"
+                                                class="buton btn btn-outline-light btn-lg">Ətraflı</button></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                <img src="{{ campaign['image_url'] }}" class="img-fluid rounded-start" alt="Nagd pul">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="container-md container-lg">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 bg-light mx-2">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner d-flex justify-content-bottom">
+                        <div class="carousel-item active">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">Rabita Mobile</h1>
+                                    <p class="fs-6 text-secondary mb-4">Rabita Mobila ilə banka getməyə ehtiyac
+                                        yoxdur, bankınız hər zaman yanınızdadır!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover  text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell1.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">Rabita Bot</h1>
+                                    <p class="fs-6 text-secondary mb-4">Azərbaycanın ilk maliyyə çat botu!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell2.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">İnternet bankçılıq</h1>
+                                    <p class="fs-6 text-secondary mb-4">Hesablarınızı idarə etmək rahatdır!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell3.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon d-none" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon d-none" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+{% endblock %}

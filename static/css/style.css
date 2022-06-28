@@ -1,0 +1,421 @@
+a{
+    text-decoration: none;
+}
+* {
+    font-family: 'Roboto-Regular';
+}
+html, body {
+    width: 100%;
+    min-height: 100%;
+    float: left;
+}
+body{
+    overflow-x: hidden;
+}
+
+.navbar-brand{
+    color: black;
+    opacity: 0.7;
+}
+.navbar-brand:hover{
+    color: #4aa949;
+}
+.active a{
+    color: #218120;
+    font-weight: bolder;
+}
+
+.form-control:focus, .form-select:focus { 
+    outline: none !important;
+    border-color: #393a39;
+    box-shadow: 0 0 10px #21940a;
+ }
+
+#slider-section1{
+    width: 100%;
+    overflow: hidden;
+
+}
+.slide1{
+    background-color: #21940a;
+    height: 1349px;
+    background-image: radial-gradient(circle at 90% 0px, rgb(110, 187, 32), rgb(18, 148, 80));
+    display: inline-block;
+    height: 490px!important;
+    
+}
+.slide2{
+    background-color: #f8fafb;
+    height: 1349px;
+    background-image: #f8fafb;
+}
+.slide2 h4{
+    color: #2e384d;
+    font-size: 40px;
+    font-weight: 500;
+}
+.slide2 p{
+    opacity: 0.6;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    color: #15334a;
+    margin-top: 12px;
+    width: 90%;
+}
+
+.slide-buttons1{
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: #2e384d;
+    margin-top: 25px;
+    padding: 15px 33px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition: all 0.5s;
+}
+.slide-buttons1:hover {
+    background-color: rgba(255, 255, 255, 0.8);
+    color:#2e384d;
+}
+
+.slide-buttons2{
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: white;
+    margin-top: 25px;
+    padding: 15px 33px;
+    border-radius: 6px;
+    background-color: #2e384d;
+    transition: all 0.5s;
+}
+.slide-buttons2:hover {
+    background-color: rgba(25, 139, 34, 0.8);
+    color: white;
+}
+
+.product-cards1 {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.product-cards1 li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    width: 350px;
+    height: 380px;
+    background-color: #f8fafb;
+    padding: 35px;
+    transition: box-shadow 0.5s;
+    border: 0px;
+}
+.product-cards1 li:hover {
+    box-shadow: 0 4px 40px 0 rgb(191 197 210 / 50%);
+}
+
+.product-cards1 li h4 {
+    margin-top: 30px;
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1;
+    letter-spacing: normal;
+    color: #2e384d;
+}
+.product-cards1 li p {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #adb6bf;
+}
+.product-cards1 li p strong {
+    font-size: 40px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 0.8;
+    letter-spacing: normal;
+    color: #2e384d;
+}
+.product-cards1 li a, .calc-btn, .home-btn {
+    width: 100%;
+    min-height: 48px;
+    height: 48px;
+    background-color: #6ebb20;
+    margin-top: 29px;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    text-align: center;
+    color: #ffffff;
+    transition: all 0.5s;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.product-cards1 li a:hover, .calc-btn:hover{
+    background-color: #2e384d;
+}
+
+.product-cards2 {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+.product-cards2 li a {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+    padding: 0 36px;
+    padding-bottom: 36px;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+
+.product-cards2 li img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 122px;
+}
+.product-cards2 li:hover img {
+    display: none;
+}
+.product-cards2 li .span1 {
+    background-image: url(../images/Kartmane.webp);
+}
+.product-cards2 li .span2 {
+    background-image: url(../images/AKIA_1.webp);
+}
+.product-cards2 li .span3 {
+    background-image: url(../images/Bot.webp);
+}
+.product-cards2 li span {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.5s;
+}
+.product-cards2 li:hover span {
+    opacity: 1;
+    visibility: visible;
+}
+.product-cards2 .card-bottom {
+    align-self: flex-end;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    height: 185px;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+.product-cards2 li {
+    width: 350px;
+    height: 344px;
+    background-color: #f8fafb;
+    border: 0px;
+    position: relative;
+    float: left;
+}
+.product-cards2 li:hover{
+    background-color: #6ebb20;
+}
+
+.product-cards2 li .card-title{
+    padding: 5px 20px;
+    border-radius: 16px;
+    border: solid 1px #6ebb20;
+    font-size: 10px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.6;
+    letter-spacing: 0.67px;
+    text-align: center;
+    color: #6ebb20;
+    text-transform: uppercase;
+    width: fit-content;
+    margin-top: 0 !important;
+}
+.product-cards2 li:hover .card-title{
+    color: white;
+    border: solid 1px white;
+}
+.product-cards2 li h4{
+    font-size: 24px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #2e384d;
+    margin-top: 26px;
+}
+.product-cards2 li:hover h4{
+    color: white;
+}
+.product-cards2 li .p-bottom{
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #708390;
+    margin-top: 10px;
+}
+.product-cards2 li:hover .p-bottom{
+    color: white;
+}
+#credit-calculator, #currency-section, #online-queue{
+    background-color: #f8fafb;
+    padding: 50px;
+    margin-top: 30px;
+}
+#range1, #range2, #range3{
+    height: 0;
+}
+
+.calc-result li p span{
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 1.27;
+    color: #2e384d;
+    width: auto;
+}
+
+.calc-result li h5 {
+    font-weight: normal;
+    font-size: large;
+    line-height: 1.5;
+    color: #708390;
+    margin-top: 5px;
+}
+.calc-btn {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+#online-queue-image, #detailed-news-image, #search-image, #error-page-image{
+    background-color: #21940a;
+    height: 300px;
+    background-image: radial-gradient(circle at 90% 0px, rgb(110, 187, 32), rgb(18, 148, 80));
+    display: inline-block;
+}
+
+.home-btn {
+    width: 10%;
+    height: 10px;
+    opacity: 0.8;
+    background-color: #6ebb20;
+    margin-top: 29px;
+    font-size: 13px;
+    text-align: center;
+    transition: all 0.5s;
+}
+.product-cards1 li a:hover, .calc-btn:hover, .home-btn:hover{
+    background-color: #2e384d;
+    opacity: 1;
+}
+
+.filter-btn{
+    width: 20%;
+    height: 30px;
+    opacity: 0.8;
+    margin-top: 29px;
+    font-size: 12px;
+    font-weight: 100;
+    text-align: center;
+    transition: all 0.5s;
+    border-color: #2e384d;
+    color: #2e384d;
+}
+.filter-btn:hover{
+    background-color:#6ebb20;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+.filter-btns .active{
+    background-color:#6ebb20;
+    color: #ffffff;
+    border-color: #ffffff;
+}
+
+#news-list li{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.news_tag{
+    font-size:x-small;
+    color:#676e80;
+    font-weight: 600;
+}
+
+.news_title_class{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: black;
+}
+.news_paragraph{
+    color: black;
+}
+
+.news_date{
+    color: #21940a;
+}
+.print-btn, .share-btn{
+    color: #676e80;
+    background-color: transparent;
+}
+
+/* @media (min-width: 1024px){
+    html, body{
+        width: 100%;
+    }
+} */
+@media screen and (max-width:990px) {
+    .navbar-brand{
+        margin-top: 10px;
+    }
+}
+/* 
+@media (max-width: 768px) {
+
+} */

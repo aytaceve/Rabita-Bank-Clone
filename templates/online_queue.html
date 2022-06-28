@@ -1,0 +1,46 @@
+{% from '_formhelpers.html' import render_select_fields, render_phone_field %}
+{% extends 'layout.html' %}
+{% set active_page = "onlayn-novbe" %}
+{% block content %} 
+    <main>
+        <div id="online-queue-image" class="container-fluid d-flex align-items-center">
+            <div class=" ps-5"> 
+                <div class="d-flex flex-column ps-5">
+                    <div class="d-flex justify-content-center mx-4 mt-5 flex-column">
+                    <h3 class="text-white fs-1">Onlayn növbə</h3> 
+                    <p class="text-white opacity-75 fw-lighter mt-3 fs-5 lh-base">Gözləmədən rahat bankçılıq xidmətlərindən faydalanmaq<br>üçün onlayn növbə götürün.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <section id="online-queue">
+                <h3>Müraciət formu</h3>
+                <p class="text-muted lh-base">Onlayn növbə</p>
+                <form action="" method="POST">
+                    {{ form.csrf_token }}
+                <div class="container pt-4 px-0 ">
+                    <ul class="d-flex justify-content-between flex-wrap mb-5">
+                        {{ render_select_fields(form.branch, id ='branch-options', placeholder= 'Filial', onchange = 'activateServiceOptions()')}}
+                        {{ render_select_fields(form.service, id = 'service-options', disabled='disabled', placeholder= 'Xidmət növü', onchange = 'activateDateTimeOptions()')}}                        <li class="w-50 ">
+                            <ul class="d-flex" id = 'service-options' disabled='disabled'>
+                                {{ render_select_fields(form.date, id = 'date-options', disabled='disabled', placeholder= 'Tarix')}}
+ 
+                                {{ render_select_fields(form.time, id = 'time-options', disabled='disabled', placeholder= 'Vaxt')}}  
+                            </ul>
+                        </li>
+                        {{ render_phone_field(form.phone, placeholder= '050-123-45-67')}}
+                     
+                    </ul>
+                    <hr>
+                    <div class=" d-flex justify-content-end">
+                        <button type="submit" class="calc-btn border-0 w-50 " name="online_novbe">Göndər →</button>
+                    </div>
+                </div>
+            </form>
+            </section>
+        </div>
+    </main>
+       
+    
+    {% endblock %}

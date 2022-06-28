@@ -1,0 +1,58 @@
+{% macro render_select_fields(field) %}
+<li class="w-50 pe-3 mt-4">
+    <label for="" class="text-secondary fs-5 mb-2">{{ field.label.text }}</label>
+
+    {{ field(class="queue-form form-select form-select-lg", **kwargs)| safe }}
+    <ul>
+        {% for error in field.errors %}
+            <li style="color:red">{{ error }}</li>
+        {% endfor %}
+    </ul>
+</li>
+{% endmacro %}
+
+
+{% macro render_phone_field(field) %}
+<li class="w-50 pe-3 mt-4">
+    <label for="" class="text-secondary fs-5 mb-2">{{ field.label.text }}</label>
+
+    {{ field(class="queue-form form-control form-select-lg", pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}", **kwargs)| safe }}
+    <ul>
+        {% for error in field.errors %}
+            <li style="color:red">{{ error }}</li>
+        {% endfor %}
+    </ul>
+
+</li>
+{% endmacro %}
+
+
+
+
+{% macro render_field(field) %}
+
+<div class="form-floating mb-3 col-md-6 col-sm-12 ps-0">
+    {{ field(class_="form-control", **kwargs)|safe }}
+    <ul>
+        {% for error in field.errors %}
+            <li style="color: red;">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    <label for="floatingSelect" class="px-4 text-size-smallest">{{ field.label.text }}</label>
+</div>
+
+{% endmacro %}
+
+{% macro render_tell_field(field) %}
+
+<div class="form-floating mb-3 col-md-6 col-sm-12 ps-0">
+    {{ field(class_="form-control", pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}", **kwargs)|safe }}
+    <ul>
+        {% for error in field.errors %}
+            <li style="color: red;">{{ error }}</li>
+        {% endfor %}
+    </ul>
+    <label for="floatingSelect" class="px-4 text-size-smallest">{{ field.label.text }}</label>
+</div>
+
+{% endmacro %}

@@ -1,0 +1,13 @@
+.input[type=range]{
+    -webkit-appearance: none;
+    -moz-appearance:    none;
+    appearance:         none;
+}
+
+.slider::-webkit-slider-thumb{
+    cursor: pointer;
+    appearance: none;
+    border: 4px white solid;
+    background-color: rgb(46, 203, 46);
+    border-radius: 50%;
+}

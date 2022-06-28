@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <main> 
+        <div id="detailed-news-image" class="container-fluid d-flex align-items-center justify-content-around">
+                    <h3 class="text-white fs-1 w-50">Xəbərlər və elanlar</h3> 
+                  {% if news.image_status %}
+                      <img class="" style="width: 300px; height: 150px;" src="{{ news.image_url }}">
+                  {% else %}
+                       <p></p>
+                  {% endif %}
+         </div>
+<div class="container  d-flex flex-column">
+        <div class="container my-5 ms-0 ps-0 w-75 float-start">
+               <h2 class="mb-5 fw-bolder">{{news.title}}</h2>
+                <div class="fs-5 my-5 lh-base text-secondary "> 
+                 {{ news.news_content | safe}}
+                </div>
+
+                <div class="icons d-flex ">
+                    <button  class="btn print-btn me-3 border-0 " ><img class="" style="width: 24px; height: 24px;" src="..\static\images\icons8-print-50.png" alt=""></button> 
+
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#shareModal" class="share-btn border-0 "><img class="" style="width: 24px; height: 24px;" src="..\static\images\icons8-share-50.png" alt=""></button>
+
+                    <div class="modal fade" id="shareModal" tabindex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Dostlarınızla paylaşın</h5>
+                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="d-flex justify-content-center addthis_inline_share_toolbox_jd2e">
+                                  
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+                    <section id="similar_news" class="my-5 py-5 ">
+                        <div class="d-flex justify-content-between pb-1">
+                            <h4 class="fw-bolder fs-3">Bunlara da bax</h4>
+                            <a href="/xeberler-ve-elanlar" class="text-success fw-normal fs-5">Daha çox</a>
+                        </div>
+                        <hr>
+                        <ul class="mt-3 d-flex">
+                          {% for similar in similar_news %}
+                                <li class="me-3"> 
+                                    <a href="{{ similar.id }}" title="{{ similar.title }}"> 
+                                        <span class="text-success">{{ similar.date }}</span> 
+                                        <h4 class="text-dark mt-3 fs-5">{{ similar.title }}</h4> 
+                                        <p></p> </a> 
+                                </li>
+                          {% endfor %}
+                        </ul>
+                    </section>
+                  </div>
+  
+    </main>
+    <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62a58e00e1080502"></script>
+
+
+    {% endblock %}

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://www.rabitabank.com/assets/images/favicon-rabita.png">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- fontawesome  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- css files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reset.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick.css')}}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='slick/slick-theme.css')}}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mystyle.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/footer.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/range.css')}}">
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header class="header-top sticky-top bg-white shadow mt-0 pt-1 pb-1 d-flex flex-column">
+        <div class="container-fluid my-3 ms-5 ps-5  d-flex ">
+            <div class="d-flex align-items-center flex-grow-1">
+                <div class="logo">
+                    <a href="/"><img src="..\static\images\rabite_new_logo.svg" alt="logo" title="logo" width="200"></a>
+                </div>
+                <div class="px-4 ">
+                    <a href="/" class="text-dark text-decoration-none fw-bolder fs-5">Fərdi</a> <span
+                        class="fw-bolder fs-5">/</span> <a href="/biznes"
+                        class="text-muted text-decoration-none fw-bolder fs-5">Biznes</a>
+                </div>
+            </div>
+            <div class="d-flex align-items-center me-5 pe-5  ">
+                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 d-flex " method="GET" action='search' >
+                    <input id="search-input" type="search" class="form-control" placeholder="Axtarın..."
+                        aria-label="Search" name="search">
+                    <button type="submit" class="search_btn btn btn-white border-0 " href="" role="button"
+                        ><img src="..\static\images\icons8-search-50.png" alt=""
+                            style="width: 24px;height: 24px;"></button>
+
+                </form>
+                <div>
+                    <a href="/InterBank/" class="text-decoration-none text-dark fs-6 fw-bolder">İnternet bankçılıq →</a>
+                </div>
+                <div class="d-flex align-items-center ms-4">
+                    <img src="..\static\images\icons8-ringer-volume-50.png" alt=""
+                        style="width:24px; height:24px; color: black;"><a href="tel:133"
+                        class="text-decoration-none fs-5 fw-normal text-dark ms-1">133</a>
+                </div>
+            </div>
+        </div>
+        <hr class="text-muted">
+        <nav id="navbar-menu" class="navbar navbar-expand-lg bg-white ms-5 ps-5">
+            <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        {% set navigation_bar = [
+                            ('/ferdi-kreditler', 'ferdi-kreditler', 'Kreditlər'),
+                            ('/ferdi-emanetler', 'ferdi-emanetler', 'Əmanətlər'),
+                            ('/kartmane-debit', 'kartmane', 'Kartmane'),
+                            ('/onlayn-xidmetler', 'onlayn-xidmetler', 'Onlayn Xidmətlər'),
+                            ('/diger-xidmetler', 'diger-xidmetler', 'Digər Xidmətlər'),
+                            ('/category/kampaniyalar-1', 'kampaniyalar-1', 'Kampaniyalar'),
+                            ('/filiallar', 'filiallar', 'Xidmət Şəbəkəsi'),
+                            ('/terefdaslar', 'terefdaslar', 'Tərəfdaşlar'),
+                            ('/online-queue', 'onlayn-novbe', 'Onlayn növbə'),
+                        ] -%}
+                        <ul id="navigation" class="navbar-nav me-auto mb-2 mb-lg-0 d-flex align-items-center">
+                            {% for href, id, caption in navigation_bar %}
+                            <li{% if id==active_page %} class="active navbar-brand fs-6 nav-item" {% endif %}><a href="{{ href|e }}"
+                                    class="navbar-brand fs-6">{{ caption|e }}</a></li>
+                                {% endfor %}
+                        </ul>
+            <ul class="d-flex me-5 pe-5">
+                <li><a href="/en" class="text-decoration-none text-secondary me-1 opacity-50">EN</a></li>
+                <li><a href="/ru" class="text-decoration-none text-secondary ms-1 opacity-50">RU</a></li>
+            </ul>
+        </div>
+    </div>
+        </nav>
+    </header>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <footer class="mt-5 mx-3">
+        <div class="container-md container-lg">
+            <div class="row mb-4">
+                <div class="col">
+                    <a href="">
+                        <img src="../static/images/rabitabank-logo.png" style="width: 168px;" alt="">
+                    </a>
+                </div>
+                <div class="col text-end">
+                    <a href="">
+                        <i class="fa-solid fa-headset fa-xl text-secondary"><span class="ms-2">133</span></i>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="d-sm-block d-md-none ">
+                <div class="row">
+                    <div class="col-4">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>Fərdi müştərilər</p>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>Biznes müştərilər</p>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>Bank haqqında</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>İnsan resurslar</p>
+                        </a>
+                    </div>
+                    <div class="col-4">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>İnvestorla əlaqə</p>
+                        </a>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="row mb-4">
+                        <p class="fw-semibold text-secondary">Baş Ofis</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <p class="text-secondary">Azərbaycan, Bakı şəh., AZ</p>
+                            <p class="text-secondary">1010, 28 May küç. 33</p>
+                        </div>
+                        <div class="col-4">
+                            <a href="" class="text-decoration-none text-secondary">
+                                <p>Tel.: (994 12) 598 44 88</p>
+                            </a>
+                            <a href="" class="text-decoration-none text-secondary">
+                                <p>Faks: (994 12) 497 11 01</p>
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-secondary">Teleks: 142453 RSKBAI</p>
+                            <a href="" class="text-decoration-none text-secondary">
+                                <p>133@rabitabank.com</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-sm-none d-md-block">
+                <div class="row mt-5">
+                    <div class="col-2 lh-lg">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>Fərdi müştərilər</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Əmanətlər</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Kreditlər</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Kartmane</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Online xidmətlər</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Pul köçürmələri</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Kampaniyalar</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Xidmət şəbəkəsi</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Saxlan Seyfləri</p>
+                        </a>
+                    </div>
+                    <div class="col-2 lh-lg">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>Biznes müştərilər</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Əmanətlər</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Kreditlər</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Plastik kartlar</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Bank xidmətləri</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Xidmət şəbəkəsi</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Kampaniyalar</p>
+                        </a>
+                    </div>
+                    <div class="col-2 lh-lg">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>Bank haqqında</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Ümumi məlumat</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Bankın tarixi</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Rəhbərlik</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Təşkilati struktur</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Banklararsı biznes</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Partnyorlarımız</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Xəbərlər və Elanlar</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Tender elanları</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>İstehlakçının müraciəti</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>FAQ</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Təhlükəsizlik</p>
+                        </a>
+                    </div>
+                    <div class="col-2 lh-lg">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>İnsan resurslar</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Dəyərlərimiz</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Mükafatlandırma siyasəti</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Vakansiyalar</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Şikayət və təkliflər</p>
+                        </a>
+                    </div>
+                    <div class="col-2 lh-lg">
+                        <a href="" class="fw-semibold text-decoration-none text-secondary footer-text-head">
+                            <p>İnvestorla əlaqə</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Risklərin idarə olunması</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Çirkli pulların yuyulmasına qarşı fəaliyyət</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Hesabatlar</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary footer-text">
+                            <p>Yükləmələr və dəstək</p>
+                        </a>
+                    </div>
+                    <div class="col-2 lh-lg">
+                        <p class="fw-semibold text-secondary">Baş Ofis</p>
+                        <p class="text-secondary">Azərbaycan, Bakı şəh., AZ</p>
+                        <p class="text-secondary">1010, 28 May küç. 33</p>
+                        <a href="" class="text-decoration-none text-secondary">
+                            <p>Tel.: (994 12) 598 44 88</p>
+                        </a>
+                        <a href="" class="text-decoration-none text-secondary">
+                            <p>Faks: (994 12) 497 11 01</p>
+                        </a>
+                        <p class="text-secondary">Teleks: 142453 RSKBAI</p>
+                        <a href="" class="text-decoration-none text-secondary">
+                            <p>133@rabitabank.com</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4 mb-5">
+                <div class="col d-flex justify-content-end">
+                    <a href="" class="me-4 d-flex align-items-center">
+                        <img style="width: 100px;" src="../static/images/infobank.jpg" alt="">
+                    </a>
+                    <a href="" class="me-5">
+                        <img style="width: 70px;" src="../static/images/msp.jpg" alt="">
+                    </a>
+                    <a href="" class="text-decoration-none">
+                        <div
+                            class="row bg-logo fa-white p-2 rounded d-flex justify-content-center align-items-center bg-logo-hover">
+                            <div class="col-1 p-0 d-flex align-items-center"><i class="fa-brands fa-apple fa-xl"></i>
+                            </div>
+                            <div class="col-11 pe-0 ps-3" style="font-size: 10px;">
+                                <p class="m-bottom-0">Download on the</p>
+                                <p class="m-bottom-0 fs-6">App Store</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="" class="text-decoration-none ms-5">
+                        <div
+                            class="row bg-logo fa-white p-2 rounded d-flex justify-content-center align-items-center bg-logo-hover">
+                            <div class="col-1 p-0 d-flex align-items-center">
+                                <img src="../static/images/googleplay.png" style="width: 25px;" alt="">
+                            </div>
+                            <div class="col-11 pe-0 ps-3" style="font-size: 10px;">
+                                <p class="m-bottom-0">Get it on</p>
+                                <p class="m-bottom-0 fs-6">Google Play</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <hr>
+            <div class="row my-4">
+                <div class="col gray-text">Rabitəbank ASC Azərbaycan Mərkəzi Bankın 136 saylı lisenziyası
+                    əsasında fəaliyyət göstərir. © Rabitəbank 2022</div>
+                <div class="col d-flex justify-content-end">
+                    <a href="https://www.facebook.com/rabitabank" class="social-logo me-4"><i class="fa-brands fa-facebook-f fa-2xl"></i></a>
+                    <a href="https://twitter.com/Rabitabank" class="social-logo me-4"><i class="fa-brands fa-twitter fa-2xl"></i></a>
+                    <a href="https://www.instagram.com/rabita_bank/" class="social-logo me-4"><i class="fa-brands fa-instagram fa-2xl"></i></a>
+                    <a href="https://www.youtube.com/channel/UCcDVfNQHex3COufXV4xRP1w" class="social-logo me-4"><i class="fa-brands fa-youtube fa-2xl"></i></a>
+                    <a href="https://www.linkedin.com/company/rabitabank-ojsc" class="social-logo me-4"><i class="fa-brands fa-linkedin fa-2xl"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='slick/slick.min.js')}}"></script>
+    <!-- bootstrap js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+    <!-- js files -->
+    <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/range.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/emanetcalc.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/credit_calc.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/script.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/currency.js')}}"></script>
+</body>
+
+</html>

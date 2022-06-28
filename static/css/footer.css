@@ -1,0 +1,48 @@
+.footer-text:hover{
+    color: black!important;
+}
+
+.footer-text{
+    color: rgb(114, 114, 114);
+}
+
+.footer-text-head:hover{
+    color: rgb(88, 88, 88)!important;
+}
+
+.gray-text{
+    color: rgb(194, 194, 194)!important;
+}
+
+.footer-text-head{
+    color: rgb(194, 194, 194)!important;
+    font-size: 16px;
+}
+
+.col-2{
+    font-size: 14px;
+}
+
+.bg-logo{
+    background-color: rgb(142, 142, 142)!important;
+}
+
+.bg-logo-hover:hover{
+    background-color: rgb(70, 70, 70)!important;
+}
+
+.fa-white{
+    color: white!important;
+}
+
+.m-bottom-0{
+    margin-bottom: 0%;
+}
+
+.social-logo{
+    color: #708390;
+}
+
+.social-logo:hover{
+    color: #1c2c37;
+}

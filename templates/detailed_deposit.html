@@ -1,0 +1,681 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<main>
+    <section class="full full_h" style="background-image: linear-gradient(275deg, #6ebb20, #129450)">
+        {% for deposit in deposits %}
+        <div class="container-md container-lg">
+            <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-md-6 col-sm-3 d-flex align-items-center ms-5" style="margin-top:85px ;">
+                    <div class="text-light fs-2 fw-semibold">{{ deposit['title'] }}</div>
+                </div>
+                <div class="col text-center d-flex justify-content-end me-4" style="margin-top:85px;">
+                    <a href=""
+                        class="text-decoration-none border rounded-pill py-2 px-3 opacity-50 emanetler-btn-lil d-sm-none d-md-block">
+                        <div class="text-white text-uppercase" style="width: 17%; font-size: 10px;">Əmanətlər</div>
+                    </a>
+                </div>
+            </div>
+            <div class="row mt-4 ms-5 text-light" style="width: 600px;">
+                {% if deposit['term']|length == 0 %}
+                <div class="mb-5 pb-4"></div>
+                {% else %}
+                <div class="col-md-4 col-sm-3 lh-lg ps-0">
+                    <div class="opacity-50 text-15px">Müddət:</div>
+                    <div class="fs-4 fw-bold">{{ deposit['term'] }} ayadək</div>
+                </div>
+                <div class="col-md-4 col-sm-3 lh-lg ps-0">
+                    <div class="opacity-50 text-15px">Faiz dərəcəsi:</div>
+                    <div class="fs-4 fw-bold">{{ deposit['percent'] }} %-dək</div>
+                </div>
+                <div class="col-md-4 col-sm-3 lh-lg ps-0">
+                    <div class="opacity-50 text-15px">Valyuta:</div>
+                    <div class="fs-4 fw-bold">AZN/EUR/USD</div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="row d-flex justify-content-end me-4">
+                <img src="{{ deposit['image_url'] }}" class="col-md-6 col-sm-6 d-md-block me-5 position-absolute"
+                    style="width: 300px; border-radius:10%;" alt="">
+            </div>
+        </div>
+        {% endfor %}
+    </section>
+    {% for deposit_info in deposits_info %}
+    <div class="container-md container-lg">
+        <section class="row w-auto py-5 mx-4">
+            <h3 class="w-50 pb-3 pt-1 ps-0 lh-base" style="font-size: 16px;">{{ deposit_info['info'] }}</h3>
+        </section>
+    </div>
+    {% endfor %}
+    <section class="border shadow-lg bg-body rounded sticky-top">
+        <div class="container-md container-lg d-flex align-items-end">
+            <div class="row mx-3">
+                <ul class="nav nav-pills" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button style="color: #708390; background-color: white;"
+                            class="nav-link button-emanet py-4 px-0 rounded-0 active" id="pills-home-tab"
+                            data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab"
+                            aria-controls="pills-home" aria-selected="true">Məhsul Haqqında</button>
+                    </li>
+                    <li class="nav-item ps-3" role="presentation">
+                        <button style="color: #708390; background-color: white;"
+                            class="nav-link button-emanet py-4 px-0 rounded-0" id="pills-profile-tab"
+                            data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab"
+                            aria-controls="pills-profile" aria-selected="false">Əmanətlərin sığortalanması</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section style="background: #F9FAFB;" class="pt-5">
+        <div class="container-md container-lg">
+            <div class="tab-content mx-4" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+                    tabindex="0">
+                    {% for deposit in deposits %}
+                    {% if deposit['title'] == 'Saxlanc seyfləri' %}
+                    <div></div>
+                    {% else %}
+                    <section class="row darkgreen fs-4 fw-bold pt-3 px-0">Sizə əmanətin şərtlərini sərbəst şəkildə
+                        seçmək imkanı verir.</section>
+                    <section class="row pt-4">Siz əmanətin faizlərini və müddətini geniş seçim imkanlarından
+                        yararlanaraq
+                        müəyyən edə bilərsiniz.</section>
+                    {% endif %}
+                    {% endfor %}
+                    <!-- Universal əmanət məhsulunun şərtləri -->
+                    {% if productTerms|length == 0 %}
+                    <div></div>
+                    {% else %}
+                    <section class="row pt-4">
+                        {% for deposit in deposits %}
+                        <div class="row fw-bold fs-4">{{ deposit['title'] }} məhsulunun şərtləri</div>
+                        {% endfor %}
+                        <div class="row">
+                            <div class="col-6 px-0 text-left">
+                                <table class="table emanetvalyuta">
+                                    {% for term in productTerms %}
+                                    <tr>
+                                        <th>{{ term['title'] }}</th>
+                                        <td class="tablevalue darkgreen">{{ term['value'] }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </table>
+                            </div>
+                            <div class="col-5 d-flex align-items-center ms-5 px-0">
+                                <div class="card py-1 px-4">
+                                    <div class="card-body bg-white d-flex justify-content-between">
+                                        <div class="pt-1">
+                                            <i class="fa-solid fa-circle-info lightgreen me-2 fa-xl"></i>
+                                        </div>
+                                        <div>
+                                            <h5 class="card-title darkgreen text-size-large">Müddətin uzadılması
+                                            </h5>
+                                            <p class="card-text text-size-small gray-color">Əmanət müddəti qurtardıqdan
+                                                sonra ertəsi gün əmanətçi əmanətin qaytarılmasını tələb etmədikdə həmin
+                                                dövrdəki tarif və şərtlərdə eyni əmanət şərtləri mövcud olduğu halda
+                                                həmin şərtlərlə, digər bütün hallarda isə Bankın birtərəfli qaydada
+                                                müəyyən etdiyi şərtlərlə uzadılır. (hesablanmış faizlər əmanət
+                                                məbləğinin üzərinə əlavə olunmur).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    {% endif %}
+
+                    <!-- Hesablanmış faizlərin ödənilmə tezliyi -->
+                    {% if percentPaySpeed|length == 0 %}
+                    <div></div>
+                    {% else %}
+                    <section class="row">
+                        <div class="row my-5">
+                            <p class="fs-4 fw-bold px-0">Hesablanmış faizlərin ödənilmə tezliyi</p>
+                            <p class="darkgreen px-0 mt-2">faiz dərəcəsi - illik</p>
+                        </div>
+                        <div class="row ayrubson ">
+                            <ul class="nav row" id="pills-tab" role="tablist">
+                                <li class="nav-item col-4 d-flex justify-content-center" role="presentation">
+                                    <button style="color: #2E384E;"
+                                        class="nav-link button-emanet py-2 px-4 rounded-0 border-0 bg-transparent fs-4 active"
+                                        id="pills-ayliq-tab" data-bs-toggle="pill" data-bs-target="#pills-ayliq"
+                                        type="button" role="tab" aria-controls="pills-ayliq"
+                                        aria-selected="true">Aylıq</button>
+                                </li>
+                                <li class="nav-item ps-3 col-4 d-flex justify-content-center" role="presentation">
+                                    <button style="color: #2E384E;"
+                                        class="nav-link button-emanet py-2 px-4 rounded-0 border-0 bg-transparent fs-4"
+                                        id="pills-rubluk-tab" data-bs-toggle="pill" data-bs-target="#pills-rubluk"
+                                        type="button" role="tab" aria-controls="pills-rubluk"
+                                        aria-selected="false">Rüblük</button>
+                                </li>
+                                <li class="nav-item ps-3 col-4 d-flex justify-content-center" role="presentation">
+                                    <button style="color: #2E384E;"
+                                        class="nav-link button-emanet py-2 px-4 rounded-0 border-0 bg-transparent fs-4"
+                                        id="pills-muddetinsonu-tab" data-bs-toggle="pill"
+                                        data-bs-target="#pills-muddetinsonu" type="button" role="tab"
+                                        aria-controls="pills-muddetinsonu" aria-selected="false">Müddətin sonu</button>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-ayliq" role="tabpanel"
+                                aria-labelledby="pills-ayliq-tab" tabindex="0">
+                                <div id="row" style="padding:0%;">
+                                    <div class="table-responsive col-11">
+                                        <table class="table">
+                                            <thead>
+                                            </thead>
+                                            <tbody class="tbody">
+                                                <tr class="" style="border-bottom: none;">
+                                                    <th>Müddət</th>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-manat-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">AZN</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-dollar-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">USD</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-euro-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">EUR</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% for demand in monthly %}
+                                                <tr>
+                                                    <th>{{ demand['term'] }}</th>
+                                                    <td>{{ demand['azn'] }}</td>
+                                                    <td>{{ demand['usd'] }}</td>
+                                                    <td>{{ demand['eur'] }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-rubluk" role="tabpanel"
+                                aria-labelledby="pills-rubluk-tab" tabindex="0">
+                                <div id="row" style="padding:0%;">
+                                    <div class="table-responsive col-11">
+                                        <table class="table">
+                                            <thead>
+                                            </thead>
+                                            <tbody class="tbody">
+                                                <tr class="" style="border-bottom: none;">
+                                                    <th>Müddət</th>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-manat-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">AZN</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-dollar-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">USD</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-euro-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">EUR</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% for demand in quarters %}
+                                                <tr>
+                                                    <th>{{ demand['term'] }}</th>
+                                                    <td>{{ demand['azn'] }}</td>
+                                                    <td>{{ demand['usd'] }}</td>
+                                                    <td>{{ demand['eur'] }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="pills-muddetinsonu" role="tabpanel"
+                                aria-labelledby="pills-muddetinsonu-tab" tabindex="0">
+                                <div id="row" style="padding:0%;">
+                                    <div class="table-responsive col-11">
+                                        <table class="table">
+                                            <thead>
+                                            </thead>
+                                            <tbody class="tbody">
+                                                <tr class="" style="border-bottom: none;">
+                                                    <th>Müddət</th>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-manat-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">AZN</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-dollar-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">USD</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="">
+                                                        <div class="d-flex justify-content-center">
+                                                            <div
+                                                                class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                                <i
+                                                                    class="fa-solid fa-euro-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                                <div class="d-flex align-items-center ms-2">EUR</div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                {% for demand in endOfTerm %}
+                                                <tr>
+                                                    <th>{{ demand['term'] }}</th>
+                                                    <td>{{ demand['azn'] }}</td>
+                                                    <td>{{ demand['usd'] }}</td>
+                                                    <td>{{ demand['eur'] }}</td>
+                                                </tr>
+                                                {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+                    {% endif %}
+
+                    <!-- Müqaviləyə vaxtından əvvəl xitam verildikdə faizlərin hesablanması -->
+                    {% if earlyEnds|length == 0 %}
+                    <div></div>
+                    {% else %}
+                    <section>
+                        <div class="row my-5">
+                            <p class="fs-4 fw-bold px-0">Müqaviləyə vaxtından əvvəl xitam verildikdə faizlərin
+                                hesablanması</p>
+                        </div>
+                        <div class="row d-flex justify-content-between">
+                            <div class="col-6">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="" style="border-bottom: none;">
+                                            <th class="w-50" colspan="1">Müqavilənin imzalanma tarixindən əmanətin
+                                                vaxtından əvvəl
+                                                məxarici
+                                                tarixinədək keçən günlərin sayı</th>
+                                            <th class="w-25" colspan="3">Əmanətin vaxtından əvvəl məxarici gününədək
+                                                hesablanmış
+                                                fazilərin
+                                                ödəniləcək hissəsi</th>
+                                        </tr>
+                                        <tr class="">
+                                            <th class=""></th>
+                                            <td class="w-25">
+                                                <div class="d-flex justify-content-center">
+                                                    <div
+                                                        class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                        <i
+                                                            class="fa-solid fa-manat-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                        <div class="d-flex align-items-center ms-2">AZN</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="w-25">
+                                                <div class="d-flex justify-content-center">
+                                                    <div
+                                                        class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                        <i
+                                                            class="fa-solid fa-dollar-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                        <div class="d-flex align-items-center ms-2">USD</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="w-25">
+                                                <div class="d-flex justify-content-center">
+                                                    <div
+                                                        class="border px-5 py-2 w-50 d-flex bg-lightgreen border-white text-white d-flex justify-content-center rounded opacity-75">
+                                                        <i
+                                                            class="fa-solid fa-euro-sign border p-1 rounded-circle border-white bg-lightgreen border-2"></i>
+                                                        <div class="d-flex align-items-center ms-2">EUR</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="">
+                                        {% for end in earlyEnds %}
+                                        <tr>
+                                            <td>{{ end['term'] }}</td>
+                                            <td>{{ end['azn'] }}</td>
+                                            <td>{{ end['usd'] }}</td>
+                                            <td>{{ end['eur'] }}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-5 mt-5 d-flex align-items-center">
+                                <div class="card py-2 w-75 ms-5">
+                                    <div class="card-body bg-white d-flex justify-content-between">
+                                        <div class="pt-1">
+                                            <i class="fa-solid fa-circle-info lightgreen me-2 fa-xl"></i>
+                                        </div>
+                                        <div>
+                                            <p class="card-text text-size-small gray-color">1 iyun 2020-ci il
+                                                tarixindən etibarən milli valyutada olan qorunan əmanətlər üzrə
+                                                illik faiz dərəcəsinin yuxarı həddini 12%, xarici valyutada isə 2,5%
+                                                müəyyən edilib.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+                tabindex="0">
+                <p class="darkgreen text-size-small fw-bold">Sığortalanmış əmanət:</p>
+                <p class="text-size-small w-75">Qorunan əmanətin (bank hesabında olan vəsaitin) elə bir hissəsidir
+                    ki, əmanətçiyə xidmət göstərən
+                    iştirakçı bankda sığorta hadisəsi baş verdikdə “Əmanətlərin sığortalanması haqqında” Qanunla
+                    müəyyən
+                    edilmiş məbləğdə Fond tərəfindən kompensasiya olunur.</p>
+                <div class="d-flex mt-3 fw-bold text-size-small">
+                    <p class="darkgreen">Daha Ətraflı:</p>
+                    <a href="" class="text-decoration-none purplecolor ms-1">Əmanətlərin Sığortalanması Fondu ⇐ </a>
+                </div>
+            </div>
+            <div class="pb-3 d-flex justify-content-end">
+                <div type="button" class="me-2">
+                    <i class="fa-solid fa-print fa-xl gray-color bg-green"></i>
+                </div>
+                <div>
+                    <div type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        <i class="fa-solid fa-share-nodes fa-xl gray-color bg-green"></i>
+                    </div>
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">Dostlarınızla paylaşın!</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body d-flex justify-content-center px-4">
+
+                                    <!-- Go to www.addthis.com/dashboard to customize your tools -->
+                                    <div class="addthis_inline_share_toolbox"></div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+    <section class="container-md container-lg my-5 p-5" style="background: #F9FAFB;">
+        <h3 class="pb-3 text-size-largest">Əmanət Kalkulyatoru</h3>
+        <p class="pb-4">Universal Əmanət</p>
+        <form id="emanetkalkulyator">
+            <div class="row">
+                <div class="form-floating mb-3 col-md-6 col-ms-12 ">
+                    <select class="form-select" id="faiz_muddeti" aria-label="Floating label select example">
+                        <option class="" value="1">Aylıq</option>
+                        <option value="2">Rüblük</option>
+                        <option value="3">Müddətin sonunda</option>
+                    </select>
+                    <label class="px-4 text-size-smallest" for="floatingSelect">Faizlərin hesablanması</label>
+                </div>
+                <div class="form-floating mb-3 col-md-6 col-ms-12">
+                    <select class="form-select" id="currency_type" aria-label="Floating label select example">
+                        <option value="1">AZN</option>
+                        <option value="2">USD</option>
+                        <option class="d-none" value="3">EUR</option>
+                    </select>
+                    <label class="px-4 text-size-smallest" for="floatingSelect">Valyuta</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating mb-3 col-md-6 col-ms-12">
+                    <select id="muddet1" class="form-select" aria-label="Floating label select example">
+                        <option value="1" class="muddetop">6 ay</option>
+                        <option value="2" class="muddetop">12 ay</option>
+                        <option value="3" class="muddetop">24 ay</option>
+                        <option value="4" class="muddetop">36 ay</option>
+                    </select>
+                    <label class="px-4 text-size-smallest" for="floatingSelect">Müddət</label>
+                </div>
+                <div class="form-floating mb-3 col-md-6 col-ms-12 slider-container">
+                    <div id="demo" type="number" class="form-control mb-0 pb-0 value-container">5000</div>
+                    <label class="px-4 text-size-smallest" for="floatingSelect">Əmanət məbləği</label>
+                    <input type="range" class="form-range my-0 py-0 slider" step="100" name="rangeInput" min="200"
+                        max="1000000" id="myRange">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-floating mb-3 col-md-6 col-ms-12">
+                    <select class="form-select " id="faiz_derecesi" aria-label="Floating label select example">
+                        <option value="1">4.00 %</option>
+                    </select>
+                    <label class="px-4 text-size-smallest" for="floatingSelect">Faiz dərəcəsi</label>
+                </div>
+            </div>
+
+
+            <hr style="opacity: 0.1;">
+            <div class="row px-2">
+                <div class="col-md-2 col-sm-6">
+                    <div class="row mb-2">Əldə olunan gəlir</div>
+                    <div class="row">
+                        <div id="yekungelir" class="col-md-3 col-sm-2 p-0 text-size-largest">200</div>
+                        <div class="col-md-3 col-sm-2 ms-5 p-0 text-size-largest">AZN</div>
+                    </div>
+                </div>
+                <div class="col-md-2 col-sm-6">
+                    <div class="row mb-2">Yekun məbləğ</div>
+                    <div class="row">
+                        <div id="yekun_mebleg" class="col-md-3 col-sm-2 p-0 text-size-largest">200</div>
+                        <div class="col-md-3 col-sm-2 ms-5 p-0 text-size-largest">AZN</div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </section>
+    <section class="container-md container-lg mb-5">
+        <div class="row">
+            <h1 class="lightgreen fs-4 fw-bold">Sizin üçün ən yaxşı təkliflər</h1>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-6">
+                    <div class="card my-3 border-0 mycard" style="max-width: 540px; background: #F9FAFB;">
+                        <div class="row g-0">
+                            <div class="col-md-7 d-flex align-items-start pt-4 ps-4" style="height:220px;">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-4">Fərdi</h5>
+                                    <p class="card-text">Nağd pul krediti üzrə kampaniya</p>
+                                    <div class="d-flex align-items-end" style="height: 100px;">
+                                        <button type="button" class="buton btn btn-outline-light btn-lg">Daha
+                                            Ətraflı</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                <img src="../static/images/nagdpulkredit.jpg" class="img-fluid rounded-start"
+                                    alt="Nagd pul">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="card my-3 border-0 mycard" style="max-width: 540px; background: #F9FAFB;">
+                        <div class="row g-0">
+                            <div class="col-md-7 d-flex align-items-start pt-4 ps-4" style="height:220px;">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-4">Fərdi</h5>
+                                    <p class="card-text">Lombard krediti üzrə Kampaniya</p>
+                                    <div class="d-flex align-items-end" style="height: 100px;">
+                                        <button type="button" class="buton btn btn-outline-light btn-lg">Daha
+                                            Ətraflı</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                <img src="../static/images/lombardkredit.jpg" class="img-fluid rounded-start"
+                                    alt="Nagd pul">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="card my-3 border-0 mycard" style="max-width: 540px; background: #F9FAFB;">
+                        <div class="row g-0">
+                            <div class="col-md-7 d-flex align-items-start pt-4 ps-4" style="height:220px;">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-4">Fərdi</h5>
+                                    <p class="card-text">Faizsiz Avans</p>
+                                    <div class="d-flex align-items-end" style="height: 100px;">
+                                        <button type="button" class="buton btn btn-outline-light btn-lg">Daha
+                                            Ətraflı</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 d-flex align-items-center">
+                                <img src="../static/images/faizsizavans.jpg" class="img-fluid rounded-start"
+                                    alt="Nagd pul">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="container-md container-lg">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 bg-light mx-2">
+                <div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner d-flex justify-content-bottom">
+                        <div class="carousel-item active">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">Rabita Mobile</h1>
+                                    <p class="fs-6 text-secondary mb-4">Rabita Mobila ilə banka getməyə ehtiyac
+                                        yoxdur, bankınız hər zaman yanınızdadır!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover  text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell1.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">Rabita Bot</h1>
+                                    <p class="fs-6 text-secondary mb-4">Azərbaycanın ilk maliyyə çat botu!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell2.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="row carusel-text align-items-center">
+                                <div class="col-md-6 col-sm-6 py-2">
+                                    <h1 class="dark-blue fs-2 fw-bold mb-4">İnternet bankçılıq</h1>
+                                    <p class="fs-6 text-secondary mb-4">Hesablarınızı idarə etmək rahatdır!</p>
+                                    <button class="btn bg-dark-blue btn-lg btn-hover text-light px-3"><span>Daha
+                                            ətraflı</span></button>
+                                </div>
+                                <div class="col-md-6 col-sm-6 pt-2">
+                                    <img class="d-block img-fluid" src="../static/images/carusell3.jpg"
+                                        style="width: 420px;" alt="First slide">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon d-none" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon d-none" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-62ac5eba3de9b25c"></script>
+{% endblock %}

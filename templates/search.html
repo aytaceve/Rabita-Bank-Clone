@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+{% block content %} 
+    <main id="search-page" >
+        <div id="search-image" class="container-fluid d-flex align-items-center justify-content-between ps-4">
+                    <div class="d-flex justify-content-center mx-5 px-4 mt-5 flex-column">
+                    <h3 class="text-white fs-1">Axtarış nəticələri</h3> 
+                    <p class="text-white opacity-75 fw-lighter mt-3 fs-5 lh-base">"{{searched}}" sözünə uyğun <span id="result-count"></span> nəticə tapıldı</p>
+                    </div>           
+            <a href="/" type="button" class="home-btn rounded-pill border border-light text-light">ƏSAS SƏHİFƏ</a>
+
+        </div>
+        
+        <div class="container my-5 filter-btns">
+            <a type="button"  class="active btn filter-btn rounded-pill border mb-4 " href="">BÜTÜN NƏTİCƏLƏR</a>
+            <hr>
+            {% for search_result in search_results %}
+             <a href="{{search_result.id}}" class="search-result fs-4 "> {{ search_result.title }}</a>
+            <br>
+            <hr>
+            <br>
+            {% else %}
+            <h4 class="news_title_class text-center text-secondary">Axtarışınıza uyğun nəticə tapılmadı.</h4> 
+            {% endfor %}
+        </div>
+    </main>
+   
+    
+    {% endblock %}
+    
